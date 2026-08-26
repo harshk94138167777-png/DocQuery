@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #171717;
+    --bg-glass: rgba(23, 23, 23, 0.6);
+    --bg-glass-hover: rgba(38, 38, 38, 0.7);
+    --text-primary: #f5f5f5;
+    --text-secondary: #a3a3a3;
+    --accent-primary: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-glow: rgba(59, 130, 246, 0.4);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.15);
+    --danger: #ef4444;
+    --success: #10b981;
+  }
+
+  body {
+    @apply font-sans antialiased text-text-primary min-h-screen overflow-x-hidden;
+    background: radial-gradient(circle at 50% 0%, #1f1f1f 0%, #0a0a0a 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-bg-glass border border-border-color rounded-2xl transition-all duration-300;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .glass-panel:hover {
+    @apply border-border-highlight -translate-y-0.5;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .input-field {
+    @apply w-full py-[14px] px-[18px] border border-border-color rounded-xl text-text-primary text-base transition-all duration-200;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+  }
+  .input-field:focus {
+    @apply outline-none border-accent-primary;
+    box-shadow: 0 0 0 4px var(--accent-glow);
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .input-field::placeholder {
+    color: #525252;
+  }
+
+  .btn-primary {
+    @apply text-white py-3 px-6 border border-white/10 rounded-xl font-medium text-[0.95rem] tracking-wide cursor-pointer transition-all duration-200 inline-flex items-center justify-center gap-2;
+    background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+    box-shadow: 0 4px 12px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-primary:hover {
+    @apply brightness-110;
+    box-shadow: 0 6px 16px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .btn-primary:active {
+    @apply scale-[0.97];
+    box-shadow: 0 2px 8px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .btn-secondary {
+    @apply text-text-primary bg-white/5 border border-border-color py-2.5 px-5 rounded-lg font-medium cursor-pointer transition-all duration-200 inline-flex items-center justify-center;
+  }
+  .btn-secondary:hover {
+    @apply bg-white/10 border-border-highlight;
+  }
+  .btn-secondary:active {
+    @apply scale-[0.97];
+  }
+  
+  .app-container {
+    @apply max-w-7xl mx-auto p-6 w-full;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

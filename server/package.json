@@ -1,0 +1,42 @@
+{
+  "name": "@docq/server",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --ignore uploads/ src/app.js",
+    "start": "node src/server.js",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "db:seed": "node src/scripts/seed.js"
+  },
+  "dependencies": {
+    "@docq/shared": "*",
+    "@google/generative-ai": "^0.21.0",
+    "argon2": "^0.41.1",
+    "bullmq": "^5.25.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csv-parse": "^5.6.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "groq-sdk": "^0.8.0",
+    "helmet": "^8.0.0",
+    "ioredis": "^5.4.1",
+    "mammoth": "^1.8.0",
+    "mongoose": "^8.8.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "openai": "^4.73.0",
+    "pdf-parse": "^1.1.1",
+    "pino": "^9.5.0",
+    "pino-pretty": "^13.0.0",
+    "uuid": "^11.0.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "eslint": "^9.14.0",
+    "vitest": "^2.1.5"
+  }
+}
