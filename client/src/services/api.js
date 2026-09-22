@@ -1,4 +1,8 @@
-export const API_BASE = import.meta.env.VITE_API_URL || '/api';
+let rawApiUrl = import.meta.env.VITE_API_URL || '/api';
+if (rawApiUrl.startsWith('http') && !rawApiUrl.endsWith('/api')) {
+  rawApiUrl = rawApiUrl.replace(/\/$/, '') + '/api';
+}
+export const API_BASE = rawApiUrl;
 
 export const apiFetch = async (endpoint, options = {}) => {
   const res = await fetch(`${API_BASE}${endpoint}`, {
