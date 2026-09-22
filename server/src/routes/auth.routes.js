@@ -16,7 +16,8 @@ router.post('/signup', authLimiter, validate(signupSchema), async (req, res, nex
     const { email, password, displayName } = req.body;
     const user = await AuthService.signup(email, password, displayName);
     const verifyToken = await AuthService.generateEmailVerificationToken(user._id);
-    await EmailService.sendVerificationEmail(email, verifyToken);
+    // Fire and forget the email so the user doesn't have to wait for the SMTP server to respond
+    EmailService.sendVerificationEmail(email, verifyToken).catch(console.error);
     const sessionId = await AuthService.createSession(user._id, req.ip || 'unknown', req.headers['user-agent'] || '');
     res.cookie('session_id', sessionId, cookieConfig);
     sendSuccess(res, { user, emailVerificationSent: true }, 201);
