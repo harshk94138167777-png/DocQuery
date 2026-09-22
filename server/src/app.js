@@ -10,10 +10,12 @@ const { createDocumentProcessorWorker } = require('./workers/documentProcessor.w
 const routes = require('./routes');
 const { logger } = require('./utils/logger');
 
+const { helmetMiddleware, corsMiddleware } = require('./config/security');
+
 const app = express();
 
-app.use(helmet());
-app.use(cors({ origin: env.CLIENT_URL, credentials: true }));
+app.use(helmetMiddleware);
+app.use(corsMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

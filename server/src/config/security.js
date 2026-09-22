@@ -19,7 +19,20 @@ const helmetMiddleware = helmet({
 });
 
 const corsMiddleware = cors({
-  origin: env.CLIENT_URL,
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    // Clean up trailing slashes from both origin and CLIENT_URL to prevent silly mismatches
+    const cleanOrigin = origin.replace(/\/$/, '');
+    const cleanConfigUrl = env.CLIENT_URL.replace(/\/$/, '');
+    
+    if (cleanOrigin === cleanConfigUrl || env.NODE_ENV === 'development') {
+      callback(null, true);
+    } else {
+      console.warn(`Blocked CORS request from origin: ${origin}. Expected: ${cleanConfigUrl}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
